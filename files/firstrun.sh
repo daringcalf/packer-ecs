@@ -82,7 +82,7 @@ sudo systemctl start awslogs
 # --now switch was added in version 220, linux 2 ami (centos 7?) is currently on version 219.
 sudo systemctl enable docker
 sudo systemctl start docker
-sudo systemctl start ecs-agent
+sudo systemctl start ecs
 
 # Health check
 # Loop until ECS agent has registered to ECS cluster
