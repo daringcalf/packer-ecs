@@ -78,11 +78,13 @@ datetime_format = %Y-%m-%dT%H:%M:%SZ
 time_zone = UTC
 EOF
 
-sudo systemctl start awslogs
+sudo systemctl enable awslogsd.service
+sudo systemctl start awslogsd.service
 # --now switch was added in version 220, linux 2 ami (centos 7?) is currently on version 219.
-sudo systemctl enable docker
-sudo systemctl start docker
-sudo systemctl start ecs
+sudo systemctl enable docker.service
+sudo systemctl start docker.service
+sudo systemctl enable ecs.service
+sudo systemctl start ecs.service
 
 # Health check
 # Loop until ECS agent has registered to ECS cluster
