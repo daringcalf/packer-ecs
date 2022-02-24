@@ -7,6 +7,8 @@
 
 build:
 	@ $(if $(AWS_PROFILE),$(call assume_role))
+	alias packer='docker run --rm -e PACKER_PLUGIN_PATH=/workspace/.packer.d/plugins -v `pwd`:/workspace -w /workspace  hashicorp/packer:latest'
+	packer init . && packer fmt . && packer validate . && \
 	docker run --rm -v `pwd`:/workspace -w /workspace \
 		-e HTTPS_PROXY=http://192.168.0.133:33338 \
 		-e PACKER_PLUGIN_PATH=/workspace/.packer.d/plugins \
@@ -17,7 +19,7 @@ build:
 
 # Dynamically assumes role and injects credentials into environment
 define assume_role
-	alias aws='docker run -i --rm -e AWS_PROFILE=$${AWS_PROFILE} -v ~/.aws/:/root/.aws/ amazon/aws-cli'
+	alias aws='docker run -i --rm -e HTTPS_PROXY=http://192.168.0.133:33338 -e AWS_PROFILE=$${AWS_PROFILE} -v ~/.aws/:/root/.aws/ amazon/aws-cli'
 
 	export AWS_DEFAULT_REGION=$$(aws configure get region)
 	export ROLE_ARN=$$(aws configure get role_arn)
