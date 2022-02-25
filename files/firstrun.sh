@@ -85,7 +85,8 @@ sudo systemctl start awslogsd.service
 sudo systemctl enable docker.service
 sudo systemctl start docker.service
 sudo systemctl enable ecs.service
-sudo systemctl start ecs.service
+# start will not run pre-start to load docker images
+sudo systemctl restart ecs.service
 
 # Health check
 # Loop until ECS agent has registered to ECS cluster
