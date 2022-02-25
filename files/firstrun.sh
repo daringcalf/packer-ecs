@@ -84,9 +84,12 @@ sudo systemctl start awslogsd.service
 # --now switch was added in version 220, linux 2 ami (centos 7?) is currently on version 219.
 sudo systemctl enable docker.service
 sudo systemctl start docker.service
+# https://github.com/aws/amazon-ecs-agent/issues/1707
+sudo cp /usr/lib/systemd/system/ecs.service /etc/systemd/system/ecs.service
+sudo sed -i '/After=cloud-final.service/d' /etc/systemd/system/ecs.service
+sudo systemctl daemon-reload
 sudo systemctl enable ecs.service
-# start will not run pre-start to load docker images
-sudo systemctl restart ecs.service
+sudo systemctl start ecs.service
 
 # Health check
 # Loop until ECS agent has registered to ECS cluster
