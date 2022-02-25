@@ -19,10 +19,9 @@ sudo timedatectl set-timezone "${TIMEZONE}"
 
 # Enable NTP
 #sudo chkconfig ntpd on
+# redundant in linux 2 ami
+# sudo sed -i '1s/^/server 169.254.169.123 prefer iburst minpoll 4 maxpoll 4\n/' /etc/chrony.conf
+# sudo sed -i '1s/^/# use the Amazon Time Sync Service (if available)\n/' /etc/chrony.conf
 
-sudo sed -i '1s/^/# use the Amazon Time Sync Service (if available)\n/' /etc/chrony.conf
-sudo sed -i '1s/^/server 169.254.169.123 prefer iburst minpoll 4 maxpoll 4\n/' /etc/chrony.conf
-
-sudo systemctl restart chronyd 
+# sudo systemctl restart chronyd 
 sudo systemctl enable chronyd 
-
