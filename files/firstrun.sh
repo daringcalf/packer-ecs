@@ -5,7 +5,8 @@ set -e
 echo "ECS_CLUSTER=${ECS_CLUSTER}" > /etc/ecs/ecs.config;echo ECS_BACKEND_HOST= >> /etc/ecs/ecs.config;
 
 # Set HTTP Proxy URL if provided
-if [ -n $PROXY_URL ]
+# https://stackoverflow.com/questions/3869072/test-for-non-zero-length-string-in-bash-n-var-or-var
+if [[ -n $PROXY_URL ]]
 then
   #echo export HTTPS_PROXY=$PROXY_URL >> /etc/sysconfig/docker
   # https://docs.docker.com/config/daemon/systemd/#httphttps-proxy
