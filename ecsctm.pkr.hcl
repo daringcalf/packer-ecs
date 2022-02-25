@@ -43,13 +43,13 @@ source "amazon-ebs" "ecsctm" {
     DockerVersion   = "20.10.7-ce"
     ECSAgentVersion = "1.59.0-1"
   }
-  launch_block_device_mappings {
-    device_name           = "/dev/xvdcy"
-    encrypted             = false
-    volume_size           = 20
-    volume_type           = "gp2"
-    delete_on_termination = true
-  }
+  #launch_block_device_mappings {
+  #  device_name           = "/dev/xvdcy"
+  #  encrypted             = false
+  #  volume_size           = 20
+  #  volume_type           = "gp2"
+  #  delete_on_termination = true
+  #}
 }
 
 build {
